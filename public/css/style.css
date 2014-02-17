@@ -1,0 +1,59 @@
+input[type=checkbox].todo-checkbox {
+  position: absolute; 
+overflow: hidden; 
+clip: rect(0 0 0 0); 
+height:1px; 
+width:1px; 
+margin:-1px; 
+padding:0;
+border:0;
+}
+
+input[type=checkbox].todo-checkbox + label.todo-label {
+padding-left: 18px;
+margin-top: 2px;
+height: 18px;
+display: inline-block;
+line-height: 20px;
+background-repeat: no-repeat;
+background-position: 0 0;
+font-size: 15px;
+vertical-align: middle;
+cursor: pointer;
+}
+
+input[type=checkbox].todo-checkbox:checked + label.todo-label {
+background-position: 0 -20px;
+}
+
+.todo-label{ background-image:url(../img/web-two-style.png); }
+
+div.todolist {
+    margin-bottom : 5px;
+    width:100%
+}
+
+div.todolist input[type=text].form-control {
+    height: 39px;
+}
+
+/* Animations for Hide / Show */
+.animate-show {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+  line-height:20px;
+  opacity:1;
+  padding:10px;
+}
+ 
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+  display:block!important;
+}
+ 
+.animate-show.ng-hide {
+  line-height:0;
+  opacity:0;
+  padding:0 10px;
+}
+
