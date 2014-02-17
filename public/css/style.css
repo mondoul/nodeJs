@@ -37,13 +37,21 @@ div.todolist input[type=text].form-control {
     height: 39px;
 }
 
+div.todolist span.glyphicon {
+    top:0px;
+}
+
+ul.todolist {
+    margin-top: 10px;
+}
+
 /* Animations for Hide / Show */
 .animate-show {
   -webkit-transition:all linear 0.5s;
   transition:all linear 0.5s;
   line-height:20px;
   opacity:1;
-  padding:10px;
+  padding: 0px 10px;
 }
  
 .animate-show.ng-hide-add,

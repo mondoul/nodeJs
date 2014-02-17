@@ -9,9 +9,14 @@ define(['jquery'], function($){
         $scope.newItemText = '';
         $scope.errorMsg = '';
         $scope.currentListId = '';
+        $scope.noList = false;
         
-        
-        $scope.showListItems = false;
+        $scope.$watch(function() { return $scope.currentListId; },
+        function(newId, oldId){
+            if (newId && newId != oldId){
+                $scope.showList(newId);
+            }
+        });
         
         var init= function(){
             todoSrv.getTodoLists()
@@ -21,10 +26,14 @@ define(['jquery'], function($){
                     if (data && data.length > 0) {
                         $scope.currentListId = _.first(data)._id;
                     }
+                    else {
+                        $scope.noList = true;
+                    }
                 })
                 .error(function(data, status){
                     $scope.infoMsg = '';
                     $scope.errorMsg = data;
+                    $scope.noList = true;
                 });
         };
     
@@ -37,6 +46,7 @@ define(['jquery'], function($){
                     }
                     $scope.errorMsg = '';
                     $scope.newList = '';
+                    $scope.noList = false;
                 })
                 .error(function(data, status) {
                     $scope.errorMsg = data;
@@ -48,12 +58,10 @@ define(['jquery'], function($){
                 .success(function(data) {
                     if (data && data.items && data.items.length > 0) {
                         $scope.listItems = data.items;
-                        $scope.showListItems = true;
                     }
                     else
                     {
                         $scope.listItems = [];
-                        $scope.showListItems = false;
                     }
                     $scope.currentListId = id;
                     $scope.errorMsg = '';

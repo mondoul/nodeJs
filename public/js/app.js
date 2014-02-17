@@ -4,7 +4,8 @@ define([
   'services',
   'directives',
   'modules/underscore-module',
-  'modules/ui.event'
+  'modules/ui.event',
+  'animate'
 ], function (angular) {
   'use strict';
 
@@ -13,7 +14,8 @@ define([
     'todoApp.services', 
     'todoApp.directives', 
     'underscore',
-    'ui.event'
+    'ui.event',
+    'ngAnimate'
   ]);
 
   return todoApp;

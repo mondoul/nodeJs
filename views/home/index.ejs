@@ -17,7 +17,7 @@
   
   <div class="alert alert-warning" ng-model="errorMsg" ng-hide="!errorMsg" ng-cloak>{{errorMsg}}</div>
   
-  <div class="row">
+  <div class="row" ng-cloak>
     <div class="col-md-3">
         <div class="input-group" style="margin-bottom:10px;">
               <input type="text" class="form-control" ng-model="newList" ng-enter="addList()">
@@ -27,40 +27,38 @@
                 </button>
               </span>
         </div>
-        <ul class="nav nav-pills nav-stacked" ng-cloak >
+        <ul class="nav nav-pills nav-stacked" ng-cloak>
             <li ng-class="{active: todoList._id == currentListId}" ng-repeat="todoList in allLists">
                <a href="#" ng-click="$parent.showList(todoList._id)">{{todoList.name}}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
             </li>
         </ul>
     </div>
     
-    <div class="col-md-8 animate-show" ng-hide="allLists.length > 0">
+    <div class="col-md-8 animate-show" ng-show="noList" ng-cloak>
         <div class="alert alert-info">
             <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;&nbsp;First, you need to create a list 
         </div>
     </div>
-    <div class="col-md-8 animate-show">
     
+    <div class="col-md-8 animate-show" ng-cloak>
         <div class="input-group todolist">
             <span class="input-group-addon">
                 <input id="newItem" type="checkbox" class="todo-checkbox" ng-model="newItemStatus">
                 <label for="newItem" class="todo-label"></label>
             </span>
             <input type="text" class="form-control" ng-model="newItemText" ng-enter="addItem()">
-            <span class="input-group-addon glyphicon glyphicon-plus"  ng-click="addItem()"></span>
+            <span class="glyphicon glyphicon-plus input-group-addon" ng-click="addItem()"></span>
         </div>
-        <ul class="list-group" ng-cloak >
-            <li>
-                <div class="input-group todolist" ng-repeat="item in listItems">
-                    <div class="input-group" >
-                        <span class="input-group-addon">
-                          <input id="item_{{item._id}}" type="checkbox" class="todo-checkbox" ng-model="item.checked" ng-checked="item.checked" ng-change="$parent.saveItem(item._id)" />
-                          <label for="item_{{item._id}}" class="todo-label"></label>
-                        </span>
-                        <input type="text" class="form-control" ng-enter="$parent.saveItem(item._id)" ng-model="item.text" value="{{item.text}}">
-                    </div>
+        <ul class="list-group todolist animate-show" ng-show="listItems.length > 0">
+            <div class="input-group todolist" ng-repeat="item in listItems">
+                <div class="input-group" >
+                    <span class="input-group-addon">
+                      <input id="item_{{item._id}}" type="checkbox" class="todo-checkbox" ng-model="item.checked" ng-checked="item.checked" ng-change="$parent.saveItem(item._id)" />
+                      <label for="item_{{item._id}}" class="todo-label"></label>
+                    </span>
+                    <input type="text" class="form-control" ng-enter="$parent.saveItem(item._id)" ng-model="item.text" value="{{item.text}}">
                 </div>
-            </li>
+            </div>
         </ul>
      </div>
     </div>

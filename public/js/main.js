@@ -3,7 +3,8 @@ require.config({
     'jquery': 'lib/jquery.min',
     'angular': 'lib/angular.min',
     'underscore': 'lib/underscore.min',
-    'bootstrap': 'lib/bootstrap.min'
+    'bootstrap': 'lib/bootstrap.min',
+    'animate' : 'lib/angular-animate'
   },
   shim: {
     bootstrap : { 
