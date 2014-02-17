@@ -50,8 +50,8 @@ exports.updateItem = function(req, res, next){
 };
 
 exports.deleteItem = function(req, res, next) {
-    var itemId = req.body.itemId;
-    var listId = req.body.listId;
+    var itemId = req.params.itemId;
+    var listId = req.params.listId;
     repo.deleteItem(listId, itemId, function(err, data) {
         if (err) return next(err);
         res.send('done');  

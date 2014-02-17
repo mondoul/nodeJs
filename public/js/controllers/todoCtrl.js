@@ -53,6 +53,10 @@ define(['jquery'], function($){
                 });
         };
         
+        $scope.changeListView = function(listId){
+            $scope.currentListId = listId;
+        }
+        
         $scope.showList = function(id){
             todoSrv.getTodoList(id)
                 .success(function(data) {
@@ -63,7 +67,6 @@ define(['jquery'], function($){
                     {
                         $scope.listItems = [];
                     }
-                    $scope.currentListId = id;
                     $scope.errorMsg = '';
                 })
                 .error(function(data, status){
@@ -96,6 +99,20 @@ define(['jquery'], function($){
                 }).error(function(data, status){
                         $scope.errorMsg = data; 
                 });
+        };
+        
+        $scope.deleteItem = function(itemId){
+          todoSrv.deleteItem(itemId, $scope.currentListId)
+            .success(function(data, status){
+                $scope.listItems = _.reject($scope.listItems, function(it){ return it._id == itemId;});
+                $scope.errorMsg = '';
+            }).error(function(data, status){
+                $scope.errorMsg = data;
+            });
+        };
+        
+        $scope.handleDrop = function(){
+            alert('item dropped !');  
         };
         
         init();

@@ -40,6 +40,12 @@ define(function(){
                        url : '/api/item',
                        data: body
                     });
+            },
+            deleteItem : function(itemId, listId){
+                return $http({
+                    method:'DELETE',
+                    url : '/api/item/' + listId + '/' + itemId
+                });
             }
         };
     }

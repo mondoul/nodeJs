@@ -16,6 +16,9 @@ require.config({
     },
     underscore : {
         exports: '_'
+    },
+    animate: {
+        deps: ['angular']
     }
   },
   packages: [

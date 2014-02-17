@@ -58,3 +58,7 @@ exports.toggleItem = function(listId, item, onResult){
         }
     );
 };
+
+exports.deleteItem = function(listId, itemId, onResult){
+    todoListCollection.remove({_id: db.ObjectID.createFromHexString(listId), "items._id": db.ObjectID.createFromHexString(itemId)}, onResult);
+};

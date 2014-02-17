@@ -13,6 +13,6 @@ exports.register = function(app){
     
     app.put('/api/item', todoList.updateItem);
     app.post('/api/item', todoList.addItem);
-    app.del('/api/item', todoList.deleteItem);
+    app.del('/api/item/:listId/:itemId', todoList.deleteItem);
     
 };
