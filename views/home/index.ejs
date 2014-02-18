@@ -1,9 +1,6 @@
 <% layout('../layout') -%>
 <% block('scripts', '<script data-main="/js/main" src="/js/lib/require.js"></script>') -%>
 <div class="container" ng-controller="todoCtrl">
-
-
-
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="navbar-inner">
       <div class="container-fluid">
@@ -14,9 +11,7 @@
       </div>
     </div>
   </nav>
-  
   <div class="alert alert-warning" ng-model="errorMsg" ng-hide="!errorMsg" ng-cloak>{{errorMsg}}</div>
-  <div class="well well-lg" droppable drop="handleDrop()"><div class="glyphicon glyphicon-trash center-block" style="left:50%"></div></div>
   <div class="row" ng-cloak>
     <div class="col-md-3">
         <div class="input-group" style="margin-bottom:10px;">
@@ -28,20 +23,23 @@
               </span>
         </div>
         <ul class="nav nav-pills nav-stacked" ng-cloak>
-            <li ng-class="{active: todoList._id == currentListId}" ng-repeat="todoList in allLists" draggable>
+            <li ng-class="{active: todoList._id == currentListId}" ng-repeat="todoList in allLists" id="{{todoList._id}}" draggable>
                <a href="#" ng-click="$parent.changeListView(todoList._id)">{{todoList.name}}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
             </li>
         </ul>
     </div>
     
-    <div class="col-md-8 animate-show" ng-show="noList" ng-cloak>
+    <div class="col-md-8 animate-show" ng-hide="allLists.length > 0" ng-cloak>
         <div class="alert alert-info">
             <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;&nbsp;First, you need to create a list 
         </div>
     </div>
     
-    <div class="col-md-8 animate-show" ng-cloak>
-        <div class="input-group todolist">
+    <div class="col-md-8 animate-show" style="position: relative" ng-cloak>
+        <div class="well well-lg drop-container" droppable drop="handleDrop" class="dropContainer" ng-show="dragging">
+            <div class="glyphicon glyphicon-trash center-block trash"></div>
+        </div>
+        <div class="input-group todolist" ng-show="allLists.length > 0" ng-cloak>
             <span class="input-group-addon">
                 <input id="newItem" type="checkbox" class="todo-checkbox" ng-model="newItemStatus">
                 <label for="newItem" class="todo-label"></label>

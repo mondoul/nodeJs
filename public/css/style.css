@@ -45,6 +45,25 @@ ul.todolist {
     margin-top: 10px;
 }
 
+div.drop-container {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    opacity: 0.8;
+    height: 200px;
+}
+
+div.drop-container.over {
+    background-color: rgb(241, 204, 148);
+}
+
+div.drop-container > div.center-block {
+    position:absolute;
+    font-size: 35px;
+    left: 47%;
+    top: 39%;
+}
+
 /* Animations for Hide / Show */
 .animate-show {
   -webkit-transition:all linear 0.5s;

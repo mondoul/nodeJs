@@ -29,6 +29,12 @@ define(function(){
                        data : item
                     });
             }, 
+            deleteList : function(listId){
+                return $http({
+                    method:'DELETE',
+                    url : '/api/list/' + listId
+                });
+            },
             updateItem : function(item, listId){
                 var body = {
                     item : item,

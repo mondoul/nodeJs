@@ -9,7 +9,7 @@ define(['jquery'], function($){
         $scope.newItemText = '';
         $scope.errorMsg = '';
         $scope.currentListId = '';
-        $scope.noList = false;
+        $scope.dragging = false;
         
         $scope.$watch(function() { return $scope.currentListId; },
         function(newId, oldId){
@@ -17,6 +17,11 @@ define(['jquery'], function($){
                 $scope.showList(newId);
             }
         });
+        
+        $scope.toggleDrag = function()
+        {
+            $scope.dragging = !$scope.dragging;
+        }
         
         var init= function(){
             todoSrv.getTodoLists()
@@ -26,14 +31,10 @@ define(['jquery'], function($){
                     if (data && data.length > 0) {
                         $scope.currentListId = _.first(data)._id;
                     }
-                    else {
-                        $scope.noList = true;
-                    }
                 })
                 .error(function(data, status){
                     $scope.infoMsg = '';
                     $scope.errorMsg = data;
-                    $scope.noList = true;
                 });
         };
     
@@ -111,8 +112,19 @@ define(['jquery'], function($){
             });
         };
         
-        $scope.handleDrop = function(){
-            alert('item dropped !');  
+        $scope.handleDrop = function(listId){
+            //if (confirm('Deleting the list will delete its items. Are you sure ?')) {
+            todoSrv.deleteList(listId) 
+                .success(function(data, status){
+                    $scope.allLists = _.reject($scope.allLists, function(it){ return it._id == listId;});
+                    if ($scope.allLists.length > 0) $scope.currentListId = _.first($scope.allLists)._id;
+                    else $scope.listItems = [];
+                    $scope.errorMsg = '';
+                })
+                .error(function(data, status){
+                    $scope.errorMsg = data;
+                });
+            //}
         };
         
         init();

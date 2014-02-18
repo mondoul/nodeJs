@@ -7,11 +7,18 @@ define(function() {
                  
                  el.draggable = true;
                  
+                 function isDragging(dragging){
+                  scope.$apply(function(scope){
+                      scope.$parent.toggleDrag();
+                  });
+                }
+                 
                  el.addEventListener('dragstart',
                      function(e){
                         e.dataTransfer.effectAllowed = 'move';
                         e.dataTransfer.setData('Text', this.id);
                         this.classList.add('drag');
+                        isDragging(true);
                         return false;
                      },
                      false);
@@ -19,6 +26,7 @@ define(function() {
                  el.addEventListener('dragend',
                      function(e){
                          this.classList.remove('drag');
+                         isDragging(false);
                          return false;
                      },
                      false);
